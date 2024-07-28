@@ -1,0 +1,31 @@
+{
+  "name": "chat-server",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/chat-server/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "chat-server:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "chat-server:build:development"
+        },
+        "production": {
+          "buildTarget": "chat-server:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/chat-server/jest.config.ts"
+      }
+    }
+  }
+}
