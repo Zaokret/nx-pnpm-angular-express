@@ -7,6 +7,8 @@ import express from 'express';
 import * as path from 'path';
 import cors from 'cors';
 
+import type { Message } from '@of-chat-ws/chat-websocket-protocol'
+
 const app = express();
 
 const corsConfig = {
@@ -18,7 +20,11 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to chat-server!' });
+  const msg: Message<'connect', {a: 1}> = {
+    type: 'connect',
+    body: {a: 1}
+  }
+  res.send(msg);
 });
 
 const port = process.env.PORT || 3333;
